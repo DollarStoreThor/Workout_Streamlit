@@ -1,8 +1,10 @@
-from workout import load_daily_workouts, plot_daily_workouts
-import streamlit as st
+import numpy as np
 import pandas as pd
+import streamlit as st
 import plotly.express as px
-import datetime
+
+from workout import load_daily_workouts, plot_daily_workouts
+
 
 day = datetime.datetime.now().strftime("%A")
 file_name = 'Workout 2026.xlsx'

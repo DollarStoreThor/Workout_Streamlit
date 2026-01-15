@@ -14,5 +14,3 @@ DOW = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday',
 Workouts_Per_Day = {}
 Workouts_Per_Day = load_daily_workouts(file_name = 'Workout 2026.xlsx')
 
-
-
