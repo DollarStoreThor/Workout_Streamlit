@@ -7,7 +7,8 @@ DOW = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday',
        'Saturday']
 
 Workouts_Per_Day = {}
-@st.cache_data
+
+#@st.cache_data
 def load_daily_workouts():
     # Iterate over the days in the week
     for day in DOW:
@@ -18,10 +19,10 @@ def load_daily_workouts():
     return Workouts_Per_Day
 
 
-@st.cache_data
+#@st.cache_data
 def plot_daily_workouts(day = 'Wednesday', Workouts_Per_Day = Workouts_Per_Day):
     
-    Figures = []
+    Figures = {}
     for workout in Workouts_Per_Day[day]:
         day_df = pd.read_csv(f'./Datasets/Excercises/{workout}.csv')
         figure = px.bar(data_frame=day_df, x='Date', y='Volume (lbs)',hover_data=['Date', 'Sets (Count)', 'Reps (Count)','Weight (lbs)','Volume (lbs)'] ,title=day_df['Excercise Name'][1], color='Volume (lbs)', color_continuous_scale=px.colors.sequential.dense)
@@ -36,7 +37,7 @@ def plot_daily_workouts(day = 'Wednesday', Workouts_Per_Day = Workouts_Per_Day):
         # Volume (lbs)
         # ---------------------------
 
-        Figures.append(figure)
+        Figures[workout] = figure
 
     return Figures
 

@@ -37,15 +37,17 @@ with st.sidebar:
 st.subheader("Showing Plots for " + day)
 daily_workout_plotly_figures = plot_daily_workouts(day = day, Workouts_Per_Day = Workouts_Per_Day)
 
-for figure in daily_workout_plotly_figures:
-    st.plotly_chart(figure)
+# for figure in daily_workout_plotly_figures:
+#    st.plotly_chart(figure)
 
 
 # Editing the Data
-st.markdown("Edit the data directly in the table below:")
-
 for workout in Workouts_Per_Day[day]:
     st.session_state.df = pd.read_csv(f'./Datasets/Excercises/{workout}.csv')
+
+    
+    # Plot the data
+    st.plotly_chart(daily_workout_plotly_figures[workout])
 
     edited_df = st.data_editor(st.session_state.df, use_container_width=True, num_rows="dynamic")
 
@@ -55,3 +57,10 @@ for workout in Workouts_Per_Day[day]:
         # Ensure index is not written to CSV
         st.session_state.df.to_csv(f'./Datasets/Excercises/{workout}.csv', index=False) 
         st.success("Changes saved to " + f'./Datasets/Excercises/{workout}.csv' + "!")
+
+        Workouts_Per_Day = load_daily_workouts()
+        daily_workout_plotly_figures = plot_daily_workouts(day = day, Workouts_Per_Day = Workouts_Per_Day)
+
+    
+    st.write('---')
+
