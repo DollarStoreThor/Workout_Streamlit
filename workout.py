@@ -8,32 +8,23 @@ DOW = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday',
 
 Workouts_Per_Day = {}
 @st.cache_data
-def load_daily_workouts(file_name = 'Workout 2026.xlsx'):
-
-    df = pd.read_excel(file_name)[:6]
+def load_daily_workouts():
     # Iterate over the days in the week
     for day in DOW:
+        
         # Grab the daily excercises
-        current_day_excercises = df[day]
-        Workouts_Per_Day[day] = []
-
-        # Iterate over the excercises
-        for item in current_day_excercises.dropna()[1:]:
-
-            # Ensure it's not a rest day
-            if item != "Rest":
-                # Load in the Workout from the .xlsx excel sheet named 'item'
-                Workouts_Per_Day[day].append(pd.read_excel(file_name, sheet_name=item)['Excercise Name'][0])
-    
+        current_day_excercises_series = pd.read_csv(f'./Datasets/Daily Excercise Series/{day}.csv')
+        Workouts_Per_Day[day] = current_day_excercises_series[day].values.tolist()
     return Workouts_Per_Day
 
 
 @st.cache_data
-def plot_daily_workouts(file_name = 'Workout 2026.xlsx', day = 'Wednesday', Workouts_Per_Day = Workouts_Per_Day):
+def plot_daily_workouts(day = 'Wednesday', Workouts_Per_Day = Workouts_Per_Day):
     
     Figures = []
     for workout in Workouts_Per_Day[day]:
-        day_df = pd.read_excel(file_name, sheet_name=workout)
+        day_df = pd.read_csv(f'./Datasets/Excercises/{workout}.csv')
+        figure = px.bar(data_frame=day_df, x='Date', y='Volume (lbs)',hover_data=['Date', 'Sets (Count)', 'Reps (Count)','Weight (lbs)','Volume (lbs)'] ,title=day_df['Excercise Name'][1], color='Volume (lbs)', color_continuous_scale=px.colors.sequential.dense)
         
         # COLUMNS -------------------
         # Excercise Name	
@@ -45,7 +36,6 @@ def plot_daily_workouts(file_name = 'Workout 2026.xlsx', day = 'Wednesday', Work
         # Volume (lbs)
         # ---------------------------
 
-        figure = px.bar(data_frame=day_df, x='Date', y='Volume (lbs)',hover_data=['Date', 'Sets (Count)', 'Reps (Count)','Weight (lbs)' ,'Volume (lbs)'] ,title=day_df['Excercise Name'][1], color='Volume (lbs)', color_continuous_scale=px.colors.sequential.dense)
         Figures.append(figure)
 
     return Figures
