@@ -1,8 +1,8 @@
-,Excercise Name,Excercise Description,Date,Rest between Sets (Minutes),Weight (lbs),Sets (Count),Reps (Count),Volume (lbs)
+Unnamed: 0,Excercise Name,Excercise Description,Date,Rest between Sets (Minutes),Weight (lbs),Sets (Count),Reps (Count),Volume (lbs)
 0,Overhead Cable Rows,"Put a pulley above your head, with the cable attaching to the weight pinon on the floor belowl. Attach the long two handled red bar to the cable. During the row lean slightly back ~110 Degree angle and pull the bar into your upper chest.",2026-01-04,2,70,3,6,1260
 1,Overhead Cable Rows,,2026-01-11,2,70,3,8,1680
 2,Overhead Cable Rows,,2026-01-18,2,70,3,10,2100
-3,Overhead Cable Rows,,2026-01-25,2,80,3,6,1440
+3,Overhead Cable Rows,hi,2026-01-25,2,80,3,6,1440
 4,Overhead Cable Rows,,2026-02-01,2,80,3,8,1920
 5,Overhead Cable Rows,,2026-02-08,2,80,3,10,2400
 6,Overhead Cable Rows,,2026-02-15,2,90,3,6,1620
