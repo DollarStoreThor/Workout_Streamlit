@@ -8,6 +8,8 @@ day = datetime.datetime.now().strftime("%A")
 file_name = 'Workout 2026.xlsx'
 Workouts_Per_Day = load_daily_workouts(file_name = file_name)
 
+st.header("Today is " + day + " the " + datetime.datetime.now().strftime("%d") + " of " + datetime.datetime.now().strftime("%B"))
+
 # COLUMNS -------------------
 # Excercise Name	
 # Excercise Description	
@@ -20,11 +22,12 @@ Workouts_Per_Day = load_daily_workouts(file_name = file_name)
 
 with st.sidebar:
     day = st.radio(
-        "Choose a shipping method",
+        "Choose a different day",
         ('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday','Saturday')
     )
     print(day)
 
+st.subheader("Showing Plots for " + day)
 daily_workout_plotly_figures = plot_daily_workouts(file_name = file_name, day = day, Workouts_Per_Day = Workouts_Per_Day)
 for figure in daily_workout_plotly_figures:
     st.plotly_chart(figure)
